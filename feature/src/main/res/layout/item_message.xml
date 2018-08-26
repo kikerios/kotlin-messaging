@@ -6,48 +6,65 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/container"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:background="@drawable/shape_bg_incoming_bubble"
-        android:layout_margin="10dp">
+        android:background="@drawable/shape_bg_outgoing_bubble"
+        android:layout_margin="10dp"
+        android:paddingLeft="26dp"
+        android:paddingRight="26dp">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/messengerImageView"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_marginLeft="26dp"
+            android:layout_centerVertical="true"
             app:srcCompat="@drawable/ic_person_white_24dp"/>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="3dp"
+            android:layout_marginLeft="1dp"
             android:gravity="center_vertical"
-            android:layout_marginLeft="10dp">
+            android:orientation="vertical"
+            android:layout_toLeftOf="@id/messengerImageViewOutcomming"
+            android:layout_toRightOf="@id/messengerImageView">
 
             <TextView
                 android:id="@+id/messageTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/primaryText"
-                android:text="message"/>
+                android:text="message"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/primaryText" />
 
             <TextView
                 android:id="@+id/messengerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+                android:text="username"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/primaryText"
-                android:text="username"/>
+                android:layout_marginBottom="3dp"/>
         </LinearLayout>
 
-    </LinearLayout>
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/messengerImageViewOutcomming"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_person_white_24dp"
+            android:visibility="visible"/>
+
+    </RelativeLayout>
 
 
 </LinearLayout>

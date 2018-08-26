@@ -3,7 +3,12 @@ package kikerios.me.kotlinmessaging.feature
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import kikerios.me.kotlinmessaging.feature.utils.Message
@@ -24,6 +29,9 @@ class MainActivity: BaseActivity() {
 
     var mRecyclerView: RecyclerView? = null
     var mProgressBar: ProgressBar? = null
+    var mLinearLayout: LinearLayout? = null
+    var mEditText: EditText? = null
+    var mButton: Button? = null
     var mLinearLayoutManager: LinearLayoutManager? = null
     var mFirebaseAdapter: FirebaseRecyclerAdapter<Message, MessageViewHolder>? = null
 
@@ -31,10 +39,17 @@ class MainActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val mUsername = getUser()!!.getDisplayName()
+        val mPhotoUrl = getUser()!!.getPhotoUrl().toString()
+        val mEmail = getUser()!!.email
+
         mLinearLayoutManager = LinearLayoutManager(this)
         mLinearLayoutManager!!.setStackFromEnd(true)
         mRecyclerView = findViewById(R.id.messageRecyclerView) as RecyclerView
         mProgressBar = findViewById(R.id.progressBar) as ProgressBar
+        mLinearLayout = findViewById(R.id.linearLayout) as LinearLayout
+        mEditText = findViewById(R.id.messageEditText) as EditText
+        mButton = findViewById(R.id.sendButton) as Button
 
         val mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference()
         var messagesRef: DatabaseReference = mFirebaseDatabaseReference.child(MESSAGES_CHILD)
@@ -55,7 +70,7 @@ class MainActivity: BaseActivity() {
 
             override fun onBindViewHolder(holder: MessageViewHolder, position: Int, model: Message) {
                 mProgressBar!!.visibility = View.GONE
-                holder!!.bind(model)
+                holder!!.bind(model, mEmail!!)
             }
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
@@ -76,8 +91,30 @@ class MainActivity: BaseActivity() {
             }
         })
 
-        mRecyclerView!!.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView!!.setAdapter(mFirebaseAdapter);
+        mRecyclerView!!.setLayoutManager(mLinearLayoutManager)
+        mRecyclerView!!.setAdapter(mFirebaseAdapter)
+
+        mEditText!!.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                if (charSequence.toString().trim().length > 0) {
+                    mButton!!.setEnabled(true)
+                } else {
+                    mButton!!.setEnabled(false)
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable) {}
+        })
+
+        mButton!!.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View) {
+                val friendlyMessage = Message(mEditText!!.getText().toString(), mUsername!!, mPhotoUrl, mEmail!!)
+                mFirebaseDatabaseReference.child(MESSAGES_CHILD).push().setValue(friendlyMessage)
+                mEditText!!.setText("")
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
