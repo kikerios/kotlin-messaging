@@ -1,10 +1,13 @@
 package kikerios.me.kotlinmessaging.feature.views
 
+import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import kikerios.me.kotlinmessaging.feature.R
 import kikerios.me.kotlinmessaging.feature.utils.Message
 
@@ -32,10 +35,24 @@ class MessageViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
             container!!.setBackgroundResource(R.drawable.shape_bg_outgoing_bubble)
             messengerImageViewOutcomming!!.visibility = View.VISIBLE
             messengerImageView!!.visibility = View.GONE
+
+            photo(messengerImageViewOutcomming!!, item)
         } else {
             container!!.setBackgroundResource(R.drawable.shape_bg_incoming_bubble)
             messengerImageViewOutcomming!!.visibility = View.GONE
             messengerImageView!!.visibility = View.VISIBLE
+
+            photo(messengerImageView!!, item)
+        }
+    }
+
+    fun photo(view: AppCompatImageView, item: Message) {
+        if(item.photoUrl == null) {
+            view.setImageDrawable(ContextCompat.getDrawable(view.context, R.drawable.ic_person_white_24dp))
+        } else {
+            Glide.with(view)
+                .load(item.photoUrl)
+                .into(view!!)
         }
     }
 }
