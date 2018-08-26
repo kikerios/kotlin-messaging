@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.GoogleAuthProvider
+import kikerios.me.kotlinmessaging.feature.utils.ActivityController
 
 class LoginActivity: BaseActivity() {
 
@@ -74,7 +75,7 @@ class LoginActivity: BaseActivity() {
                         Toast.makeText(this@LoginActivity, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this@LoginActivity, "Authentication Successfull.", Toast.LENGTH_SHORT).show()
-                        // TODO - gotoMainActivity
+                        ActivityController.goToMain(this@LoginActivity)
                     }
                 }
             })

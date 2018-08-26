@@ -10,6 +10,7 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import kikerios.me.kotlinmessaging.feature.utils.ActivityController
 
 /**
  * Created by kikerios on 8/25/2018.
@@ -60,6 +61,7 @@ open class BaseActivity: AppCompatActivity(), GoogleApiClient.OnConnectionFailed
     fun logout() {
         getAuth().signOut()
         Auth.GoogleSignInApi.signOut(getGoogleApiClient())
+        ActivityController.goToLogin(this@BaseActivity)
     }
 
     override fun onConnectionFailed(connectionResult: ConnectionResult) {

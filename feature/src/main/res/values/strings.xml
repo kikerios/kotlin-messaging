@@ -1,3 +1,4 @@
 <resources>
     <string name="client_id">642907633626-8nighn857ce4ibpmbqa3fn2kr6m364ch.apps.googleusercontent.com</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

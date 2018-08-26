@@ -20,7 +20,7 @@ class LaunchActivity : BaseActivity() {
             if (getUser() == null) {
                 ActivityController.goToLogin(this)
             } else {
-                // TODO - gotoMainActivity
+                ActivityController.goToMain(this)
             }
         })
     }
