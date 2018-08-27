@@ -59,6 +59,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "642907633626-bjjtn6g9rlv6tc5d7ui7ikn62shmbchc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kikerios.me.kotlinmessaging.app",
+            "certificate_hash": "e2461fcad7e7e613ebe73970f28b358c3e626c68"
+          }
+        },
+        {
+          "client_id": "642907633626-r9ganpk2ecnf5701e9esgph45jkmtoj3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kikerios.me.kotlinmessaging.app",
+            "certificate_hash": "b86d729f47a3091d5693860163cdda9556eb6afe"
+          }
+        },
+        {
           "client_id": "642907633626-8nighn857ce4ibpmbqa3fn2kr6m364ch.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -73,8 +89,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642907633626-8nighn857ce4ibpmbqa3fn2kr6m364ch.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
